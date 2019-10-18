@@ -21,7 +21,7 @@ zher1.place(x = 25, y = 40)
 bt_neogrost = Button (mainloop, text = 'Неограниченный рост', bg = "gray")
 bt_neogrost.place(x = 65, y = 34)
 
-entr1 = Entry(mainloop, width = 20)
+entr1 = Label(mainloop, text = "Тут появится значение" )
 entr1.place(x=210, y=40)
 
 # второе
@@ -38,7 +38,7 @@ zher2.place(x = 25, y = 100)
 bt_ogrrost = Button (mainloop, text = 'Ограниченный рост', bg = "gray")
 bt_ogrrost.place(x = 65, y = 94)
 
-entr2 = Entry(mainloop, width = 7)
+entr2 = Label(mainloop, text = "Тут появится значение" )
 entr2.place(x=198, y=100)
 
 # третье
@@ -55,7 +55,7 @@ zher3.place(x = 25, y = 160)
 otlov = Button (mainloop, text = 'Ограниченный рост с отловом', bg = "gray")
 otlov.place(x = 65, y = 154)
 
-entr3 = Entry(mainloop, width = 7)
+entr3 = Label(mainloop, text = "Тут" )
 entr3.place(x=255, y=160)
 
 # четвертое
@@ -87,13 +87,13 @@ zher6.place(x = 125, y = 220)
 zhertvi=Label(mainloop, text='Жертвы')
 zhertvi.place(x=40, y=245)
 
-zhertvi2=Entry(mainloop, width = 5)
+zhertvi2=Label(mainloop, text = 'Рез.')
 zhertvi2.place(x=90, y = 245)
 
 hishnik=Label(mainloop, text='Хищники')
 hishnik.place(x=140, y=245)
 
-hishnik1=Entry(mainloop, width=5)
+hishnik1=Label(mainloop, text = 'Рез.')
 hishnik1.place(x=200, y=245)
 
 # рядом с канвасом
@@ -121,3 +121,62 @@ bt_grafik.place(x=40, y = 415)
 
 canv=Canvas(mainloop, width=200, heigh=200, bg='gray', )
 canv.place(x=130, y=280)
+
+# привязка к кнопкам
+
+def neogr_rost(event):
+    a = float(zher1.get())
+    N = int(kolcikl.get()) 
+    gertv = int(zher7.get())
+    for i in range(N):
+        gertv = gertv*a
+    entr1["text"] = str(int(gertv))
+bt_neogrost.bind("<Button-1>",neogr_rost)
+
+def ogr(event):
+    a=float(zher1.get())
+    b=float(zher2.get())
+    N=int(kolcikl.get())
+    jertv=int(zher7.get())
+    for i in range(N):
+        jertv=jertv*(a-b*jertv)
+    entr2["text"]=str(int(jertv))
+bt_ogrrost.bind("<Button-1>", ogr)
+
+def ogr_s_otl(event):
+    a=float(zher1.get())
+    b=float(zher2.get())
+    c=float(zher3.get())
+    N=int(kolcikl.get())
+    jertv=int(zher7.get())
+    for i in range(N):
+        jertv=(a-b*jertv)*jertv-c
+    entr3["text"]=str(int(jertv))
+otlov.bind("<Button-1>", ogr_s_otl)
+
+def jer_xi(event):
+    a=float(zher1.get())
+    b=float(zher2.get())
+    c=float(zher3.get())
+    d=float(zher4.get())
+    f=float(zher5.get())
+    g=float(zher6.get())
+    N=int(kolcikl.get())
+    jertv=int(zher7.get())
+    xi=int(zher8.get())
+    for i in range(N):
+        jertv=(a-b*jertv)*jertv-c-f*jertv*xi
+        xi=d*xi+g*jertv*xi
+    zhertvi2 ["text"]=str(int(jertv))
+    hishnik1["text"]=str(int(xi))
+bt_hish.bind("<Button-1>", jer_xi)
+
+
+
+
+
+
+
+
+
+    
